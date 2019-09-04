@@ -1,7 +1,7 @@
 #TidyTuesday 9/3/2019
 
 library('tidyverse')
-library(ggplot2)
+library(hrbrthemes)
 #Clear the environment
 rm(list=ls())
 
@@ -26,18 +26,14 @@ ggplot(alldata, aes(x=date_of_introduction, y=capacity_bits))+
 #Not interesting but at least I remember how to make a plot. 
 
 
-install.packages("hrbrthemes")
-library(hrbrthemes)
-
 #basic scatterplot of CPU tansistor count, color coded by designer
 ggplot(cpu, aes(x=date_of_introduction, y=transistor_count, color=designer, na.rm=TRUE)) + 
   geom_point(size=2) +
   theme_ipsum()+
   scale_y_log10()+
-  labs(x="Date of Introduction", y="Log Transistor Count", fill="Designer")
+  labs(x="Date of Introduction", y="Log Transistor Count", fill="Designer")+
+  ggsave(filename = "tidytuesday_090319/090319Plot.png")
 
-library("dplyr")
-library("tidyr")
 
 #Renaming columns so they match then re-merging from beginning
 #get column names
