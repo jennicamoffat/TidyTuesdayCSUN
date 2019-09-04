@@ -20,8 +20,40 @@ View(df)
 alldata<-merge(x=df, y=ram, by="date_of_introduction")
 View(alldata)
 
-#Make basic line graph
+#Make basic scatterplot
 ggplot(alldata, aes(x=date_of_introduction, y=capacity_bits))+
   geom_point()
 #Not interesting but at least I remember how to make a plot. 
+
+
+install.packages("hrbrthemes")
+library(hrbrthemes)
+
+#basic scatterplot of CPU tansistor count, color coded by designer
+ggplot(cpu, aes(x=date_of_introduction, y=transistor_count, color=designer, na.rm=TRUE)) + 
+  geom_point(size=2) +
+  theme_ipsum()+
+  scale_y_log10()+
+  labs(x="Date of Introduction", y="Log Transistor Count", fill="Designer")
+
+library("dplyr")
+library("tidyr")
+
+#Renaming columns so they match then re-merging from beginning
+#get column names
+colnames(gpu)
+names(gpu)[names(gpu) == "designer_s"] <-"designer"
+View(gpu) #changed designer_s to designer so it matches the cpu dataset
+#Merge datasets again
+df<-merge(x=cpu,y=gpu, by="date_of_introduction")
+View(df)
+#Merge new df with ram so all df's are merged
+alldata<-merge(x=df, y=ram, by="date_of_introduction")
+View(alldata)
+#Now labeled as designer.x and designer.y. 
+
+tally <- cpu %>% 
+  group_by(designer) %>% 
+  tally()
+print.data.frame(tally)
 
