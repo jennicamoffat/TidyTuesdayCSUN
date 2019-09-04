@@ -11,3 +11,4 @@ ram <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytu
 View(cpu)
 View(gpu)
 View(ram)
+
