@@ -1,6 +1,7 @@
 #TidyTuesday 9/3/2019
 
 library('tidyverse')
+library(ggplot2)
 #Clear the environment
 rm(list=ls())
 
@@ -11,4 +12,10 @@ ram <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytu
 View(cpu)
 View(gpu)
 View(ram)
+
+df<-merge(x=cpu,y=gpu, by="date_of_introduction")
+View(df)
+
+alldata<-merge(x=df, y=ram, by="date_of_introduction")
+View(alldata)
 
