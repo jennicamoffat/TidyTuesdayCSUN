@@ -99,7 +99,8 @@ GraphMonthYear<-SummaryMonthYear %>%
   ylab("Total accidents") +
   theme_ipsum()+
   theme_bw()+
-  xlab("Date")
+  xlab("Date")+ 
+  ggtitle("Total Amusement Park Injuries Over Time")
 GraphMonthYear
 #FINALLY
 
