@@ -81,7 +81,7 @@ Graph<-safer_parks %>%
 Graph
 #still not what I want
 
-#Using zoo library you can transform the date
+#Using zoo library you can transform the date into Month/Year
 safer_parks$MonthYear <- as.Date(as.yearmon(safer_parks$acc_date))
 View(safer_parks)
 #Looks like it kinda worked, but all dates have -01 after them for some reason. 
@@ -91,7 +91,7 @@ SummaryMonthYear<- safer_parks %>%
   summarize(sum=sum(num_injured, na.rm=TRUE))
 SummaryMonthYear
 
-#Now I'm gonna try to graph it again
+#Gonna try to graph it again
 GraphMonthYear<-SummaryMonthYear %>%
   ggplot(aes(x=MonthYear, y=sum))+
   geom_line(color="#69b3a2") +
@@ -107,17 +107,3 @@ GraphMonthYear
 GraphMonthYearInt<-ggplotly(GraphMonthYear)
 GraphMonthYearInt
 
-#Can I make it from the full data
-
-GraphMonthYear <- safer_parks %>%
-  ggplot(aes(x=MonthYear, y=num_injured))+
-  geom_point(color="#69b3a2") +
-  ylab("Total accidents") +
-  theme_ipsum()+
-  theme_bw()+
-  xlab("Date")
-GraphMonthYear
-#Hmm not really. Doesn't automatically sum.
-
-#WAnt to add labeles to specific points. 
-geom_text(aes(label=ifelse(PTS>24,as.character(Name),'')),hjust=0,vjust=0)
