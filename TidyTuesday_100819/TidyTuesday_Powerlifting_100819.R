@@ -3,7 +3,9 @@
 #Created by Jennica Moffat
 
 library(tidyverse)
-library(RColorBrewer)
+library(tidyr)
+library(gridExtra)
+
 
 #Clear the environment
 rm(list=ls())
@@ -38,10 +40,49 @@ Squats<-SummaryData[ -c(4, 5, 7, 8) ]
 Bench<-SummaryData[ -c(3, 5, 6, 8)]
 Deadlift<-SummaryData[-c(3, 4, 6, 7)]
 
+#Pivoting data using tidyr's pivot_longer fxn
+SquatsLong<-pivot_longer(Squats, c(maxsquat, avgsquat), names_to="Squat", values_to = "Weight")
+BenchLong<-pivot_longer(Bench, c(maxbench, avgbench), names_to="Bench", values_to = "Weight")
+DeadliftLong<-pivot_longer(Deadlift, c(maxdeadlift, avgdeadlift), names_to="Deadlift", values_to = "Weight")
+
+
 #Squats graph. Graphing max and average for each sex over time
+SquatPlot<-ggplot(SquatsLong, aes(x=date, y=Weight, size=Squat, color=sex))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
+  labs(x="Date",y="Weight (kg)")+
+  scale_color_manual(values = c("cadetblue3", "darkgoldenrod2"))+
+  scale_size_manual(values=c(1,2))+
+  theme(legend.position="none")+
+  ggtitle("Annual average and maximum squat weight over time")
+SquatPlot
 
+#Bench graph
+BenchPlot<-ggplot(BenchLong, aes(x=date, y=Weight, size=Bench, color=sex))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
+  labs(x="Date",y="Weight (kg)")+
+  scale_color_manual(values = c("cadetblue3", "darkgoldenrod2"), name  ="Sex",
+                     labels=c("Female", "Male"))+
+  scale_size_manual(values=c(1,2), name  =" ",
+                    labels=c("Average", "Maximum"))+
+  theme(legend.position = "top")+
+  ggtitle("Annual average and maximum bench weight over time")
+BenchPlot
 
-
+#Deadlift graph
+DeadliftPlot<-ggplot(DeadliftLong, aes(x=date, y=Weight, size=Deadlift, color=sex))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
+  labs(x="Date",y="Weight (kg)")+
+  scale_color_manual(values = c("cadetblue3", "darkgoldenrod2"))+
+  scale_size_manual(values=c(1,2))+
+  theme(legend.position="none")+
+  ggtitle("Annual average and maximum deadlift weight over time")
+DeadliftPlot
 
 #to print two graphs in one
-grid.arrange(graph1, graph2, ncol=1)
+grid.arrange(BenchPlot, DeadliftPlot, SquatPlot, ncol=1)
