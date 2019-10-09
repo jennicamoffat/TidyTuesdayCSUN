@@ -64,7 +64,7 @@ BenchPlot<-ggplot(BenchLong, aes(x=date, y=Weight, size=Bench, color=sex))+
   geom_smooth(method="lm")+
   theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
   labs(x="Date",y="Weight (kg)")+
-  scale_color_manual(values = c("cadetblue3", "darkgoldenrod2"), name  ="Sex",
+  scale_color_manual(values = c("cadetblue3", "darkgoldenrod2"), name  =" ",
                      labels=c("Female", "Male"))+
   scale_size_manual(values=c(1,2), name  =" ",
                     labels=c("Average", "Maximum"))+
