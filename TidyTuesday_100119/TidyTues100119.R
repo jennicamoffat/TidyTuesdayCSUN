@@ -1,4 +1,5 @@
 #Tidy Tuesday week 5 10/1/2019
+#PIZZA
 #Created by Jennica Moffat
 
 library(tidyverse)
@@ -37,7 +38,7 @@ for (shape in c(
 )) {
   print(ggplot(mydata, aes(label = place, size = mean, color = mean)) +
           scale_radius(range = c(0, 20), limits = c(0, NA)) +
-          theme_minimal()+ ggtitle(shape)+
+          theme_minimal()+ ggtitle("Proportion of 'Excellent' Reviews by Pizza Place")+
           geom_text_wordcloud_area(shape = shape) +
           scale_color_gradient(low = "red", high = "darkred"))
 }
