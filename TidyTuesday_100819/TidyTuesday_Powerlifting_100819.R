@@ -35,7 +35,7 @@ SummaryData<-champdata %>%
             avgsquat=mean(best3squat_kg, na.rm=TRUE), avgbench=mean(best3bench_kg, na.rm=TRUE), avgdeadlift=mean(best3deadlift_kg, na.rm=TRUE))
 View(SummaryData)
 
-#Subsetting data by activity
+#Subsetting data by activity by removing columns that are NOT that activity
 Squats<-SummaryData[ -c(4, 5, 7, 8) ]
 Bench<-SummaryData[ -c(3, 5, 6, 8)]
 Deadlift<-SummaryData[-c(3, 4, 6, 7)]
