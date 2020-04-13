@@ -72,7 +72,7 @@ CombinedPlot <- ggplot(data=CombinedData, aes(x = reorder(team_name, -SBwins), y
 CombinedPlot
 #ggplot hates having two scales, so I'm trying something else.
 
-
+#Just going to add superbowl wins as text above bars
 CombinedPlot2 <- ggplot(data=CombinedData, aes(x = reorder(team_name, -SBwins), y=TotalWins, fill=TotalWins))+  #basic plot
   geom_bar(stat="identity", width=0.8) + 
   theme_classic()+

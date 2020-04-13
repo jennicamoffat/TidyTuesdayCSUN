@@ -45,7 +45,7 @@ Plot<-ggplot(Data, aes(x=meanconsumption, xend=meanCO2, y=food_category)) +
                color="cyan4", size=1.25)+
   geom_dumbbell(color="cyan4", size_x=3.5, size_xend=3.5, 
                 colour_x="darkgoldenrod", colour_xend="firebrick3")+
-  labs(x=NULL, y=NULL, title="Consumption and CO2 emmission by food category", subtitle="CO2 emissions (red) vs Consumption (gold) in Kg/person/year ")+
+  labs(x=NULL, y=NULL, title="Consumption and CO2 emission by food category", subtitle="CO2 emissions (red) vs Consumption (gold) in Kg/person/year ")+
   theme_bw()+
   theme(legend.position = "right")
 Plot+ggsave("FoodCO2Plot.pdf", width=11, height=6.19, dpi=300, unit="in")

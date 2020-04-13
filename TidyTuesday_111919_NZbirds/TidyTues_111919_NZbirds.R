@@ -42,7 +42,7 @@ Top <- ggplot(TopSpecies, aes(x=bird_breed, y=Rank, fill=bird_breed)) +
   scale_fill_manual(values = wes_palette("Royal2"))+
   theme(plot.title = element_text(size=14), axis.text.x=element_text(color="black", size=11), axis.text.y=element_text(size=12), axis.title.y = element_text(color="black", size=14), 
         panel.grid.major=element_blank(), panel.grid.minor=element_blank(), legend.position = "none") +
-  ggtitle("Most Favorited Birds")+
+  ggtitle("Most Favored Birds")+
   labs(x=" ", y="Rank")
 Top
 
@@ -82,7 +82,7 @@ Bottom <- ggplot(BottomBestSpecies, aes(x=bird_breed, y=Rank, fill=bird_breed)) 
   scale_fill_manual(values = wes_palette("Royal2"))+
   theme(plot.title = element_text(size=14), axis.text.x=element_text(color="black", size=11), axis.text.y=element_text(size=12), axis.title.y = element_text(color="black", size=14), 
         panel.grid.major=element_blank(), panel.grid.minor=element_blank(), legend.position = "none") +
-  ggtitle("Least Favorited Birds")+
+  ggtitle("Least Favored Birds")+
   labs(x=" ", y="Rank")
 Bottom
 

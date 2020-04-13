@@ -16,7 +16,7 @@ tdf_winners$nationality<-as.factor(tdf_winners$nationality)
 nlevels(tdf_winners$nationality)
 #14 nationalities
 
-#extra year from start_date column
+#adding year from start_date column
 tdf_winners$race.year = as.numeric(format(tdf_winners$start_date, "%Y"))
 
 #Which country has the most winners
