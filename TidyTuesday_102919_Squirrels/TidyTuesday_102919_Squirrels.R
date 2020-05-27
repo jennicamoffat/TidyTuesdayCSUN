@@ -25,7 +25,7 @@ agedata <- mydata4 %>% group_by(age) %>%
 agedata
 
 agedata.long<-gather(data=agedata, key='behavior', value='count', running, chasing, climbing, eating, foraging)
-
+agedata.long
 #Gonna make a percent stacked barplot
 
 SquirrelPlot<-ggplot(agedata.long, aes(x=age, y=count, fill=factor(behavior), group=factor(behavior)))+  #basic plot
