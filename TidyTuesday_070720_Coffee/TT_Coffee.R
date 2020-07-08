@@ -5,9 +5,9 @@
 library(tidyverse)
 library(ggridges)
 library(PNWColors)
-library("png")
-install.packages("grid")
-install.packages("ggimage")
+library(png)
+library(grid)
+library(ggimage)
 
 #Clear environment
 rm(list=ls())
@@ -70,13 +70,13 @@ plot<-ggplot(coffee.long, aes(x = grade, y = criteria, fill = criteria)) +
   scale_fill_manual(values=pal)+
   labs(x="", y="")+
   ggtitle("Distribution of Coffee Ratings")+
-  theme(plot.title = element_text(size=16, hjust=0.5, face="bold"), axis.text.x=element_text(size=14), axis.text.y=element_text(size=14))+
-  scale_y_discrete(labels=c("Uniformity", "Sweetness", "Flavor", "Cupper Points", "Clean Cup", "Body", "Balance", "Aroma", "Aftertaste", "Acidity"))
+  theme(plot.title = element_text(size=25, hjust=0.5, face="bold"), axis.text.x=element_text(size=14), axis.text.y=element_text(size=14))+
+  scale_y_discrete(labels=c("Acidity", "Aftertaste", "Aroma", "Balance", "Body", "Clean Cup", "Cupper Points", "Flavor", "Sweetness", "Uniformity"))
 plot
 
 #Adding coffee image
 img <- readPNG("TidyTuesday_070720_Coffee/coffee.png")
 g <- rasterGrob(img, interpolate=TRUE)
 
-SquirrelPlot2 <- SquirrelPlot + annotation_custom(g, xmin=-1.5, xmax=Inf, ymin=0, ymax=0.3)
-SquirrelPlot2
+coffee.plot <- plot + annotation_custom(g, xmin=-0.4, xmax=3, ymin=1, ymax=5)
+coffee.plot
