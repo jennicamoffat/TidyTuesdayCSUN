@@ -13,27 +13,7 @@ library(ggimage)
 rm(list=ls())
 # Get the Data
 coffee_ratings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-07/coffee_ratings.csv')
-
 View(coffee_ratings)
-
-coffee_ratings$species<-as.factor(coffee_ratings$species)
-nlevels(coffee_ratings$species)
-summary(coffee_ratings$species)
-#Waaaaaaaay more Arabica
-#1311 Arabica, 28 Robusta
-
-#Scatter of total and cupper points
-ggplot(coffee_ratings, aes(x=total_cup_points, y=cupper_points)) + 
-  geom_point()
-
-#PCA
-coffee.pca <- prcomp(coffee_ratings[,21:30])
-summary(coffee.pca)
-library(ggfortify)
-pca.plot <- autoplot(coffee.pca, data = coffee_ratings, colour = 'species')
-pca.plot
-
-mean(coffee_ratings$total_cup_points)
 
 #Remove the one with a score of 0 for everything, I'm guessing that was a mistake.
 coffee.data<-coffee_ratings%>%
@@ -44,15 +24,10 @@ ggplot(coffee.data, aes(x = total_cup_points, y = species, fill = species)) +
   geom_density_ridges() +
   theme_ridges() + 
   theme(legend.position = "none")
+#Not really interesting with just the two types
 
-#Boxplot
-ggplot(coffee.data, aes(x=species, y=total_cup_points))+  #basic plot
-  theme_bw()+
-  geom_boxplot()+
-  labs(x="Species", y="Total Cup Points")
-
-#More complicated ridgeplot
-#I need to tidy my data quite a bit. 
+#Ridgeplot of the 10 rating criteria
+#Subsetting just for the ten criteria
 coffee.data2 = subset(coffee.data, select = c(aroma, flavor, aftertaste, acidity, body, balance, uniformity, clean_cup, sweetness, cupper_points))
 View(coffee.data2)
 #Rotate data long
@@ -79,4 +54,4 @@ img <- readPNG("TidyTuesday_070720_Coffee/coffee.png")
 g <- rasterGrob(img, interpolate=TRUE)
 
 coffee.plot <- plot + annotation_custom(g, xmin=-0.4, xmax=3, ymin=1, ymax=5)
-coffee.plot
+coffee.plot+ggsave("TidyTuesday_070720_Coffee/CoffeeRidgeplot.png", width=10, height=5)
