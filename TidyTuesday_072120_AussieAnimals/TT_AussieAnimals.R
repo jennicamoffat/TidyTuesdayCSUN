@@ -5,10 +5,6 @@
 library(tidyverse)
 library(treemap)
 library(PNWColors)
-library(png)
-library(grid)
-library(ggimage)
-
 
 #Clear environment
 rm(list=ls())
@@ -19,11 +15,7 @@ animal_complaints <- readr::read_csv('https://raw.githubusercontent.com/rfordata
 View(animal_outcomes)
 View(animal_complaints)
 
-animal_complaints$`Animal Type`<-as.factor(animal_complaints$`Animal Type`)
-View(summary(animal_complaints$`Complaint Type`))
-animal_complaints$Suburb<-as.factor(animal_complaints$Suburb)
-View(summary(animal_complaints$`Animal Type`))
-
+#Exploring data
 animal_outcomes$animal_type<-as.factor(animal_outcomes$animal_type)
 summary(animal_outcomes$animal_type)
 animal_outcomes$outcome<-as.factor(animal_outcomes$outcome)
@@ -41,6 +33,7 @@ outcomes.data<-outcomes.long%>%
 View(outcomes.data)
 outcomes.data$region<-as.factor(outcomes.data$region)
 
+#Basic tree map
 treemap(outcomes.data, #Your data frame object
         index=c("animal_type","outcome","region"),  #A list of your categorical variables
         vSize = "total",  #This is your quantitative variable
@@ -50,8 +43,10 @@ treemap(outcomes.data, #Your data frame object
         fontsize.title = 14 #Change the font size of the title
 )
 
+#Set palette
 pal=pnw_palette("Shuksan2",8)
 
+#Removed region because it was too much for this plot
 plot <- treemap(outcomes.data, #Your data frame object
         index=c("animal_type","outcome"),  #A list of your categorical variables
         vSize = "total",  #This is your quantitative variable
@@ -60,14 +55,13 @@ plot <- treemap(outcomes.data, #Your data frame object
         palette = pal,  #Select your color palette from the RColorBrewer presets or make your own.
         title="Animal Complaint Outcomes", #Customize your title
         fontsize.title = 15, #Change the font size of the title
-        title.legend="Outcome",
-        position.legend="right", 
-        fontsize.labels	= c(20, 12),
-        overlap.labels = 0.5,
+        title.legend="Outcome", #Titles plot
+        position.legend="right", #Position the legend
+        fontsize.labels	= c(20, 12), #Change the font size of each level
+        overlap.labels = 0.5, #Labels will not show up if they overlap more than 50%
         align.labels=list(
           c("center", "center"), 
-          c("center", "right")
+          c("right", "bottom") #Align the labels. Main subject in center, subsubject is bottom right
         ))
 
-plot+ggsave("AnimalComplaints.png", width=10, height=5)
 
