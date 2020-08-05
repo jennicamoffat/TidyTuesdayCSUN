@@ -11,7 +11,6 @@ rm(list=ls())
 #load data
 energy_types <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-08-04/energy_types.csv')
 
-View(energy_types)
 #Removing level 2 so I don't double count hydro power
 energy<-energy_types%>%
   filter(level=="Level 1")
@@ -76,7 +75,5 @@ graph.combined<-long_data_ordered2 %>%
   scale_y_continuous(expand=c(0,0), limits=c(0,650000), labels=function(EnergyProd) format(EnergyProd, scientific = FALSE))+
   transition_time(Year)
 graph.combined
-anim_save("TT_EuropeEnergyPlot", animation=last_animation())
+anim_save("TT_EuropeEnergyPlot.gif", animation=last_animation())
 #Okay, I can't get this to look smooth, but it works. 
-
-
